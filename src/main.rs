@@ -1,7 +1,5 @@
-use std::{
-    io,
-    mem,
-};
+use std::fs::File;
 
-const HCI_DEV_NONE: u16 = 0xffff;
-const HCI_CHANNEL_MONITOR: u16 = 2;
+fn main(){
+    let dir_of_file = File::open(r#"video.mp4"#);
+}
