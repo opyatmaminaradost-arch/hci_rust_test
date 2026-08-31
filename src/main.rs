@@ -4,6 +4,15 @@ use std::io::{BufRead, BufReader, Read};
 
 fn main() {
     check_all_boxes_in_mp4().unwrap();
+
+    let vec = vec![0, 1, 176, 219];
+
+    println!("{:?}", convert_four(&vec));
+}
+
+struct BoxHeader {
+    size: u32,
+    name: String,
 }
 
 fn find_config_values(pattern: &str) -> io::Result<Option<File>> {
@@ -38,8 +47,18 @@ fn check_all_boxes_in_mp4() -> io::Result<()> {
 
         file.read_to_end(&mut buff)?;
 
-        println!("Readed: {}", buff.len());
+        println!("{:?}", &buff[..32]);
     }
 
     Ok(())
+}
+
+
+fn convert_four(box_size: & Vec<u8>) -> u32 {
+    let mut result = 0u32;
+
+    for byte in box_size {
+        result = result * 256 + *byte as u32;
+    }
+    result
 }
