@@ -54,7 +54,7 @@ fn check_all_boxes_in_mp4() -> io::Result<()> {
 }
 
 
-fn convert_four(box_size: & Vec<u8>) -> u32 {
+fn convert_four(box_size: &Vec<u8>) -> u32 {
     let mut result = 0u32;
 
     for byte in box_size {
