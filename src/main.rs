@@ -12,7 +12,7 @@ fn main() {
 
 struct BoxHeader {
     size: u32,
-    name: String,
+    name: str,
 }
 
 fn find_config_values(pattern: &str) -> io::Result<Option<File>> {
@@ -55,10 +55,20 @@ fn check_all_boxes_in_mp4() -> io::Result<()> {
 
 
 fn convert_first_four_bytes(box_size: &Vec<u8>) -> u32 {
-    let mut result = 0u32;
+    let mut result_size = 0u32;
 
     for byte in box_size {
-        result = result * 256 + *byte as u32;
+        result_size = result_size * 256 + *byte as u32;
     }
-    result
+    result_size
+}
+
+fn convert_bytes_to_ascii(box_size: &Vec<u8>, start_pointer: usize, end_pointer: usize) -> String {
+
+    let temp_box: Vec<u8> = box_size[start_pointer..end_pointer].to_vec();
+
+    let result_name = String::from_utf8(temp_box).unwrap();
+
+    result_name
+
 }
